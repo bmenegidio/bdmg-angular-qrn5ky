@@ -55,11 +55,24 @@ export class AppComponent implements OnInit {
     });
   }
 
-  saveLocalStorage() {
+  saveToLocalStorage() {
     localStorage.setItem(
       this.cepDataLocalStorageKey,
       JSON.stringify(this.formGroup.value)
     );
-    this.snackBar.open('Os dados foram salvos com sucesso.');
+    this.snackBar.open('✅ Os dados foram salvos com sucesso.', '', {});
+  }
+
+  loadFromLocalStorage() {
+    const cepData: CepModel = JSON.parse(
+      localStorage.getItem(this.cepDataLocalStorageKey)
+    );
+
+    if (!cepData) {
+      this.snackBar.open('ℹ️ Não existem dados no LocalStorage.');
+      return;
+    }
+
+    this.updateForm(cepData);
   }
 }

@@ -58,8 +58,15 @@
           <input formControlName="siafi" matInput />
         </mat-form-field>
 
-        <button (click)="saveLocalStorage()" color="primary" mat-raised-button>
+        <button
+          (click)="saveToLocalStorage()"
+          color="primary"
+          mat-raised-button
+        >
           Salvar no LocalStorage
+        </button>
+        <button (click)="loadFromLocalStorage()" color="primary" mat-button>
+          Carregar do LocalStorage
         </button>
       </div>
     </mat-card-content>
