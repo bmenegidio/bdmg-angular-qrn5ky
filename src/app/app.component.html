@@ -3,3 +3,65 @@
 <br />
 
 <div>Escreva seu código HTML abaixo:</div>
+
+<form [formGroup]="formGroup" *ngIf="cepResult$ | async; else loading">
+  <mat-card>
+    <mat-card-content>
+      <div fxLayout="column" fxLayoutGap="10px">
+        <mat-form-field>
+          <mat-label>CEP</mat-label>
+          <input matInput formControlName="cep" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Rua</mat-label>
+          <input matInput formControlName="street" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Complemento</mat-label>
+          <input matInput formControlName="complement" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Bairro</mat-label>
+          <input matInput formControlName="neighborhood" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="city" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>UF</mat-label>
+          <input matInput formControlName="uf" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Código IBGE</mat-label>
+          <input matInput formControlName="ibgeCode" ngDisabled="true" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>GIA</mat-label>
+          <input matInput formControlName="gia" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>DDD</mat-label>
+          <input matInput formControlName="ddd" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>SIAFI</mat-label>
+          <input matInput formControlName="siafi" />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>
+
+<ng-template #loading>
+  <p>Carregando...</p>
+</ng-template>

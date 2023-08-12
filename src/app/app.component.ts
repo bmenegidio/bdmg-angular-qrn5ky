@@ -1,5 +1,7 @@
 import { Component, OnInit, VERSION } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { AppService } from './app.service';
 import { CepModel } from './models/cep-model';
@@ -13,10 +15,40 @@ export class AppComponent implements OnInit {
   name = 'Angular ' + VERSION.major;
   cep = '30160907';
   cepResult$: Observable<CepModel>;
+  formGroup: FormGroup;
 
-  constructor(private appService: AppService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private appService: AppService
+  ) {}
 
   ngOnInit() {
-    this.cepResult$ = this.appService.getCep(this.cep);
+    this.initForm();
+    this.cepResult$ = this.appService
+      .getCep(this.cep)
+      .pipe(tap((cepData) => this.updateForm(cepData)));
+  }
+
+  initForm() {
+    this.formGroup = this.formBuilder.group({
+      cep: [''],
+      street: [''],
+      complement: [''],
+      neighborhood: [''],
+      city: [''],
+      uf: [''],
+      ibgeCode: [{ value: '', disabled: true }],
+      gia: [''],
+      ddd: [''],
+      siafi: [{ value: '', disabled: true }],
+    });
+  }
+
+  updateForm(cepData: CepModel) {
+    Object.keys(cepData).map((formKey) => {
+      this.formGroup.patchValue({
+        [formKey]: cepData[formKey],
+      });
+    });
   }
 }
