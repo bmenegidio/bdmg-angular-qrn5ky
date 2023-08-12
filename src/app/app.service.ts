@@ -26,7 +26,7 @@ export class AppService {
 
   getCep(cep: string) {
     return this.httpClient
-      .get<ViaCepResponseModel>(`https://viacep2.com.br/ws/${cep}/json/`)
+      .get<ViaCepResponseModel>(`https://viacep.com.br/ws/${cep}/json/`)
       .pipe(
         map((viaCepResponse) => this.parseViaCepResponse(viaCepResponse)),
         take(1)
