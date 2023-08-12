@@ -4,7 +4,10 @@
 
 <div>Escreva seu código HTML abaixo:</div>
 
-<form [formGroup]="formGroup" *ngIf="cepResult$ | async; else loading">
+<form
+  [formGroup]="formGroup"
+  *ngIf="cepResult$ | async; else loadingCepOrError"
+>
   <mat-card>
     <mat-card-content>
       <div fxLayout="column" fxLayoutGap="10px">
@@ -73,6 +76,15 @@
   </mat-card>
 </form>
 
-<ng-template #loading>
-  <p>Carregando...</p>
+<ng-template #loadingCepOrError>
+  <ng-container *ngIf="!cepResultError; else error">
+    <p>Carregando...</p>
+  </ng-container>
+
+  <ng-template #error>
+    <div class="error-container" fxLayout="column" fxLayoutGap="5px">
+      <span>Ocorreu um erro ao consultar o Cep 🙁</span>
+      <a href="#" (click)="fetchCepData()">Tentar novamente.</a>
+    </div>
+  </ng-template>
 </ng-template>

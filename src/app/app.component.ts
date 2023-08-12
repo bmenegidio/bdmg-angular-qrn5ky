@@ -1,7 +1,7 @@
 import { Component, OnInit, VERSION } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { AppService } from './app.service';
@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   name = 'Angular ' + VERSION.major;
   cep = '30160907';
   cepResult$: Observable<CepModel>;
+  cepResultError = false;
   formGroup: FormGroup;
   cepDataLocalStorageKey = '@cepData';
 
@@ -27,9 +28,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.cepResult$ = this.appService
-      .getCep(this.cep)
-      .pipe(tap((cepData) => this.updateForm(cepData)));
+    this.fetchCepData();
+  }
+
+  fetchCepData() {
+    this.cepResult$ = this.appService.getCep(this.cep).pipe(
+      tap((cepData) => this.updateForm(cepData)),
+      catchError((err) => {
+        this.cepResultError = true;
+        return throwError(() => err);
+      })
+    );
   }
 
   initForm() {
