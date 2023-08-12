@@ -5,6 +5,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { AppService } from './app.service';
+import { LocalStorageService } from './local-storage.service';
 import { CepModel } from './models/cep-model';
 
 @Component({
@@ -23,7 +24,8 @@ export class AppComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private appService: AppService
+    private appService: AppService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit() {
@@ -65,16 +67,16 @@ export class AppComponent implements OnInit {
   }
 
   saveToLocalStorage() {
-    localStorage.setItem(
+    this.localStorageService.set<CepModel>(
       this.cepDataLocalStorageKey,
-      JSON.stringify(this.formGroup.value)
+      this.formGroup.value
     );
     this.snackBar.open('✅ Os dados foram salvos com sucesso.');
   }
 
   loadFromLocalStorage() {
-    const cepData: CepModel = JSON.parse(
-      localStorage.getItem(this.cepDataLocalStorageKey)
+    const cepData: CepModel = this.localStorageService.get<CepModel>(
+      this.cepDataLocalStorageKey
     );
 
     if (!cepData) {

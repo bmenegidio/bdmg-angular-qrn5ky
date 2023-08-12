@@ -16,6 +16,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { AppComponent } from './app.component';
 import { HelloComponent } from '../hello.component';
 import { AppService } from './app.service';
+import { LocalStorageService } from './local-storage.service';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { AppService } from './app.service';
   bootstrap: [AppComponent],
   providers: [
     AppService,
+    LocalStorageService,
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
   ],
 })
