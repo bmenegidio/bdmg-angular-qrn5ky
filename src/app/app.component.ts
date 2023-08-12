@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
       this.cepDataLocalStorageKey,
       JSON.stringify(this.formGroup.value)
     );
-    this.snackBar.open('✅ Os dados foram salvos com sucesso.', '', {});
+    this.snackBar.open('✅ Os dados foram salvos com sucesso.');
   }
 
   loadFromLocalStorage() {
@@ -74,5 +74,6 @@ export class AppComponent implements OnInit {
     }
 
     this.updateForm(cepData);
+    this.snackBar.open('✅ Os dados foram carregados com sucesso.');
   }
 }
