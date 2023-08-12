@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from '../hello.component';
@@ -25,6 +26,9 @@ import { AppService } from './app.service';
     MatInputModule,
     MatCardModule,
     FlexLayoutModule,
+    NgxMaskModule.forRoot({
+      showMaskTyped: true,
+    }),
   ],
   declarations: [AppComponent, HelloComponent],
   bootstrap: [AppComponent],

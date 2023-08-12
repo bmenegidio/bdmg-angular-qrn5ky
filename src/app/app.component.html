@@ -10,52 +10,52 @@
       <div fxLayout="column" fxLayoutGap="10px">
         <mat-form-field>
           <mat-label>CEP</mat-label>
-          <input matInput formControlName="cep" />
+          <input formControlName="cep" mask="00000-000" matInput />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Rua</mat-label>
-          <input matInput formControlName="street" />
+          <input formControlName="street" matInput />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Complemento</mat-label>
-          <input matInput formControlName="complement" />
+          <input formControlName="complement" matInput mask="0.000" />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Bairro</mat-label>
-          <input matInput formControlName="neighborhood" />
+          <input formControlName="neighborhood" matInput />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Cidade</mat-label>
-          <input matInput formControlName="city" />
+          <input formControlName="city" matInput />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>UF</mat-label>
-          <input matInput formControlName="uf" />
+          <input formControlName="uf" matInput />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Código IBGE</mat-label>
-          <input matInput formControlName="ibgeCode" ngDisabled="true" />
+          <input formControlName="ibgeCode" ngDisabled="true" matInput />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>GIA</mat-label>
-          <input matInput formControlName="gia" />
+          <input formControlName="gia" matInput />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>DDD</mat-label>
-          <input matInput formControlName="ddd" />
+          <input formControlName="ddd" matInput />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>SIAFI</mat-label>
-          <input matInput formControlName="siafi" />
+          <input formControlName="siafi" matInput />
         </mat-form-field>
       </div>
     </mat-card-content>
