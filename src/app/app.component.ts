@@ -1,5 +1,6 @@
 import { Component, OnInit, VERSION } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -16,9 +17,11 @@ export class AppComponent implements OnInit {
   cep = '30160907';
   cepResult$: Observable<CepModel>;
   formGroup: FormGroup;
+  cepDataLocalStorageKey = '@cepData';
 
   constructor(
     private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
     private appService: AppService
   ) {}
 
@@ -50,5 +53,13 @@ export class AppComponent implements OnInit {
         [formKey]: cepData[formKey],
       });
     });
+  }
+
+  saveLocalStorage() {
+    localStorage.setItem(
+      this.cepDataLocalStorageKey,
+      JSON.stringify(this.formGroup.value)
+    );
+    this.snackBar.open('Os dados foram salvos com sucesso.');
   }
 }
